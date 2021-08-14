@@ -25,6 +25,9 @@ io.on('connection', socket => {
     messages.push(data)
     socket.broadcast.emit('receivedMessage', data)
   })
+  socket.on('disconnect', () => {
+    console.log(`Socket disconnect: ${socket.id}`)
+  })
 })
 
 server.listen(3833, () => {
