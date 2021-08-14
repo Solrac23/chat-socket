@@ -2,10 +2,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
+const { env } = require('process')
 
 const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
+const PORT = process.env.PORT || 3833
 
 try {
   mongoose.connect('mongodb+srv://Chat-socket:Mistake132021@cluster0.gwqdx.mongodb.net/chat?retryWrites=true&w=majority', {
@@ -23,7 +25,6 @@ app.set('views', path.join(__dirname, 'public'))
 app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'html')
 app.use(express.json())
-app.use(routes)
 
 app.use('/', (req, res) => {
   res.render('index.html')
@@ -45,6 +46,6 @@ io.on('connection', socket => {
   })
 })
 
-server.listen(3833, () => {
+server.listen(PORT, () => {
   console.log('Server is running!!')
 })
