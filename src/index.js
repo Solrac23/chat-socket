@@ -2,12 +2,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
-const { env } = require('process')
+const routes = express.Router()
+const Chat = require('./model/Chat')
 
 const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
-const PORT = process.env.PORT || 3833
 
 try {
   mongoose.connect('mongodb+srv://Chat-socket:Mistake132021@cluster0.gwqdx.mongodb.net/chat?retryWrites=true&w=majority', {
@@ -26,7 +26,8 @@ app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'html')
 app.use(express.json())
 
-app.use('/', (req, res) => {
+routes.get('/', async (req, res) => {
+  
   res.render('index.html')
 })
 
@@ -41,11 +42,8 @@ io.on('connection', socket => {
     messages.push(data)
     socket.broadcast.emit('receivedMessage', data)
   })
-  socket.on('disconnect', () => {
-    console.log(`Socket disconnect: ${socket.id}`)
-  })
 })
 
-server.listen(PORT, () => {
-  console.log('Server is running!!')
+server.listen(3833, () => {
+  console.log(`server listening at http://localhost:${PORT}`)
 })
