@@ -11,5 +11,6 @@
 
 ## Imagem:
 <img src="./doc/Screenshot_7.png" alt="Chat"/>
+<p>Fonte: <b>imagem do Chat Online</b></p>
 
 <p>Carlos Santos &copy;</p>
