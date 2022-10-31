@@ -12,4 +12,4 @@
 ## Imagem:
 <img src="./doc/Screenshot_7.png" alt="Chat"/>
 
-<span>Carlos Santos &reg;</span>
+<p>Carlos Santos &copy;</p>
