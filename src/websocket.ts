@@ -1,6 +1,10 @@
 import { io } from "./index"
 
-let messages:any = []
+interface IMessages {
+	messages: string
+}
+
+let message:IMessages[] = []
 
 io.on('connection', socket => {
   console.log(`Socket connect: ${socket.id}`)
@@ -9,10 +13,10 @@ io.on('connection', socket => {
     console.log(`Socket disconnect: ${socket.id}`)
   })
 
-  socket.emit('previousMessages', messages)
+  socket.emit('previousMessages', message)
 
   socket.on('sendMessage', (data: any) => {
-    messages.push(data)
+    message.push(data)
     socket.broadcast.emit('receivedMessage', data)
   })
 })
